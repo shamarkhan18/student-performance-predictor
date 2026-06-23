@@ -8,8 +8,7 @@ from sklearn.linear_model import LinearRegression
 
 df = pd.read_csv("StudentsPerformance.csv")
 
-# Encode text columns
-
+# Encode the text columns
 le = LabelEncoder()
 
 categorical_columns = [
@@ -23,16 +22,13 @@ categorical_columns = [
 for col in categorical_columns:
     df[col] = le.fit_transform(df[col])
 
-# Features (Input)
-
+# Features(Input)
 X = df.drop('math score', axis=1)
 
-# Target (Output)
-
+# Target(Output)
 y = df['math score']
 
-# Split dataset
-
+# Splitting the dataset
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -40,22 +36,14 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
-# Train model
-
-model = LinearRegression()
-
-model.fit(X_train, y_train)
-
-# Train model
-
+# Training the model
 model = LinearRegression()
 
 model.fit(X_train, y_train)
 
 print("Model trained successfully!")
 
-# Make predictions
-
+# Making predictions
 predictions = model.predict(X_test)
 
 print("\nFirst 10 Predictions:")
@@ -72,7 +60,7 @@ print("\nModel Performance")
 print("Mean Absolute Error:", round(mae, 2))
 print("R2 Score:", round(r2, 2))
 
-print("\n------ Predict New Student ------")
+print("\n--- Predict New Student ---")
 
 reading = float(input("Reading Score: "))
 writing = float(input("Writing Score: "))
